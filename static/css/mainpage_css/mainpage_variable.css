@@ -1,0 +1,10 @@
+:root {
+  --main-background-color: #f8f9fa;
+  --content-title: #212529;
+  --content-text: #495057;
+  --board-background: #ffffff;
+  --nav-color: #575a5e;
+  --body-margin: 50px 25px;
+}
+
+/* --transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s; */
