@@ -9,7 +9,7 @@
 <div>
     <div class="signup-page">
         <div class="form">
-            <form class="login-form" action="/user/signup" method="post">
+            <form class="login-form" action="/user/signup" method="POST">
                 <select class="location" name="location" id="location">
                     <option value="">지역을 선택해 주세요.</option>
                     <option value="경기">경기</option>
@@ -30,15 +30,15 @@
                     <option value="제주">제주</option>
                     <option value="해외">해외</option>
                 </select>
-                <input type="text" placeholder="이메일을 입력해주세요."/>
-                <input type="text" placeholder="이름을 입력해주세요."/>
-                <input type="password" placeholder="비밀번호를 입력해주세요."/>
+                <input type="text" placeholder="이메일을 입력해주세요." name="email"/>
+                <input type="text" placeholder="이름을 입력해주세요." name="name"/>
+                <input type="password" placeholder="비밀번호를 입력해주세요."name="password"/>
                 <input type="password" placeholder="비밀번호를 다시 입력해주세요."/>
                 <span class="gender">
                 <label><input type="radio" name="gender" value="1" checked>남성</label>
                 <label><input type="radio" name="gender" value="2">여성</label>
                 </span>
-                <button>Sign Up</button>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
     </div>
