@@ -88,10 +88,12 @@ def insert_user():
         """
         curs.execute(sql, (uid, upw, nm, gender, email, loc))
 
+        session["usernm"] = nm
+
         db.commit()
         db.close()
 
-        return render_template('main.html')
+        return redirect("/")
 
 
 @app.route('/logout')
