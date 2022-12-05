@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import pymysql
+import json
 
 app = Flask(__name__)
 
@@ -29,6 +31,30 @@ def mypage():
 @app.route('/setting')
 def mypageSetting():
     return render_template('mypage_setting.html')
+
+# sign up, INSERT
+@app.route('/signup', methods = ['POST', 'GET'])
+def insert_user():
+    db = pymysql.connect(host = 'localhost', user = 'root', db = 'mysql', password = 'M@ansghkwo12', charset = 'utf8')
+    curs = db.cursor()
+
+    if request.method == 'POST':
+        uid = request.form['name']
+        upw = request.form['password']
+        nm = request.form['name']
+        gender = request.form['gender']
+        email = request.form['email']
+        loc = request.form['location']
+
+        sql = """insert into t_user (uid, upw, nm, gender, email, location)
+         values (%s,%s,%s,%s,%s,%s)
+        """
+        curs.execute(sql, (uid, upw, nm, gender))
+
+        return 'insert success', 200
+
+    user = request.json
+
 
 # 서버실행
 if __name__ == '__main__':
