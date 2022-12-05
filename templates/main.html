@@ -30,11 +30,16 @@
 <nav>
     <a href="main.html" class="nav__column">I-log</a>
     <div class="nav__column">
+        {% if login == True %}
+        <h3>{{usernm}}님 어서오세요!</h3>
+        <a href="logout">로그아웃</a>
+        {% else %}
+        <a href="/users/login" class="nav__column--login-btn">로그인</a>
+        {% endif %}
         <div><i class="fas fa-adjust fa-xl"></i></div>
         <a href="search.html" class="nav__column--search-btn">
             <i class="fas fa-search fa-xl"></i>
         </a>
-        <a href="login" class="nav__column--login-btn">로그인</a>
     </div>
 </nav>
 
