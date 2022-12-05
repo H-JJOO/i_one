@@ -3,7 +3,6 @@
 nav {
   margin: 50px 25px;
   max-width: 2000px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +11,7 @@ nav {
 }
 
 .nav__column:nth-child(1) {
-  color: var(--nav--color);
+  color:#575a5e;
   font-size: 1.125rem;
   font-weight: 500;
   font-family: 'Fira Mono';
