@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/login.css">
+<script src="/static/javascript/login.js"></script>
+<title>LOGIN</title>
+{% endblock %}
+{% block body %}
+<div>
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form">
+                <input type="text" placeholder="username"/>
+                <input type="password" placeholder="password"/>
+                <button>login</button>
+                <p class="message"><a href="signup">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

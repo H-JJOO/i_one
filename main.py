@@ -9,6 +9,18 @@ def root():
     return render_template('main.html')
 
 
+# login
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+# sign up
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+
 # 서버실행
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000,debug=True)
+    app.run('0.0.0.0', port = 5000, debug = True)
