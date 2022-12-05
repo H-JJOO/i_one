@@ -30,13 +30,21 @@ def insert_user():
     curs = db.cursor()
 
     if request.method == 'POST':
-        val = request.form
-        return render_template("signup.html", result = val)
+        uid = request.form['name']
+        upw = request.form['password']
+        nm = request.form['name']
+        gender = request.form['gender']
+        email = request.form['email']
+        loc = request.form['location']
+
+        sql = """insert into t_user (uid, upw, nm, gender, email, location)
+         values (%s,%s,%s,%s,%s,%s)
+        """
+        curs.execute(sql, (uid, upw, nm, gender))
+
+        return 'insert success', 200
 
     user = request.json
-
-
-
 
 
 # 서버실행

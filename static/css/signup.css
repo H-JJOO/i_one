@@ -115,8 +115,15 @@ body {
 .location {
     font-size: 15px;
     width: 250px;
+    margin-bottom: 20px;
 }
 
 .gender {
     font-size: 15px;
+
+}
+
+.gender > label {
+    display: inline-block;
+    margin: 20px;
 }
