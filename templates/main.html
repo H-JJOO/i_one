@@ -1,6 +1,26 @@
-<!doctype html>
+<html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>I-Log</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_reset.css') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_variable.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_main.css') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_nav.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_boards.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage_sorting.css') }}">
+
+
+</head>
+<body>
+=======
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -21,6 +41,647 @@ alright! let's go project!
 test
 {% endblock %}
 
+>>>>>>> 7b036380d60a216af083f8c796df0a39edebd824
 
+
+<nav>
+    <a href="main.html" class="nav__column">I-log</a>
+    <div class="nav__column">
+        <div><i class="fas fa-adjust fa-xl"></i></div>
+        <a href="search.html" class="nav__column--search-btn">
+            <i class="fas fa-search fa-xl"></i>
+        </a>
+        <a href="login.html" class="nav__column--login-btn">로그인</a>
+    </div>
+</nav>
+
+<div class="sorting">
+    <div class="sorting__column">
+        <span><i class="fa-solid fa-arrow-trend-up"></i> 트렌딩</span>
+        <span><i class="fa-regular fa-clock"></i> <a>최신</a></span>
+    </div>
+    <div class="sorting__column">
+        <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+        <span></span>
+    </div>
+</div>
+
+<div class="board__parent">
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+    <a class="board" href="#">
+        <div
+                class="content__thumbnail"
+                style="
+              background-image: url(https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80);
+            "
+        ></div>
+        <!-- <img
+          class="content__thumbnail"
+          src="https://images.unsplash.com/photo-1670105791108-718c8d4b738e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+        /> -->
+
+        <!-- 여기서부터 content 제목div, 서브div, 작성일div -->
+        <div class="content__text">
+            <div class="content__title">
+                함께 일하고 싶은 사람 - 1. 업무 습관
+            </div>
+
+            <div class="content__sub">
+                경력을 시작한 지 2년 쯤 지났을 때, 팀장님이 질문했습니다. “함께
+                일하고 싶은 사람은 어떤 사람일까요?”괜찮은 대답을 하지 못
+                했습니다.
+            </div>
+            <div class="content__date">2022년 11월 9일 | 14개의 댓글</div>
+        </div>
+
+        <!-- 여기서부터 유저 정보 -->
+        <div class="user">
+            <div>
+                <img class="user__avatar" src="" alt=""/>
+                <span class="user__name">by ninto_2</span>
+            </div>
+            <div>
+                <i class="fas fa-heart"></i>
+                <span>789</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+<script
+        src="https://kit.fontawesome.com/af8a64a43c.js"
+        crossorigin="anonymous"
+></script>
 </body>
+</html>
 </html>

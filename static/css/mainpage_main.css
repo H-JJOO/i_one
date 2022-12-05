@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&family=Open+Sans:wght@400;700&display=swap');
+
+@import 'mainpage_reset.css';
+@import 'mainpage_nav.css';
+@import 'mainpage_sorting.css';
+@import 'mainpage_boards.css';
+
+body {
+  margin: 0 auto;
+  font-family: 'Fira Mono, monospace Open Sans, sans-serif';
+  background-color: #ebebeb;
+  max-width: 2000px;
+}
+@media screen and (max-width: 767px) {
+  .board__parent {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1056px) {
+  .board__parent {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1057px) and (max-width: 1440px) {
+  .board__parent {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1919px) {
+  .board__parent {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .board__parent {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
