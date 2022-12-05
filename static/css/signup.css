@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.login-page {
+.signup-page {
     width: 500px;
-    padding: 17% 0 0;
+    padding: 10% 0 0;
     margin: auto;
 }
 
@@ -111,3 +111,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+.location {
+    font-size: 15px;
+    width: 250px;
+}
+
+.gender {
+    font-size: 15px;
+}
