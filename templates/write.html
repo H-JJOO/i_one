@@ -17,33 +17,33 @@
     font-size: 15px;
 </style>
 <script>
-    $(document).ready(function () {
-    save_board();
-});
-
-function save_board() {
-    let title = $("#title").val();
-    let content = $("#content").val();
-
-    //   if (title === "" || content === "") {
-    //     alert("작성해주세요.");
-    //     return;
-    // }
-    $.ajax({
-        type: "POST",
-        url: "/boards/board",
-        data: {
-            'id': userId,
-            'title': title,
-            'content': content
-        },
-        success: function (response) {
-            alert(response["msg"]);
-            window.location.reload();
-        }
-    });
-}
-
+//     $(document).ready(function () {
+//     save_board();
+// });
+//
+// function save_board() {
+//     let title = $("#title").val();
+//     let content = $("#content").val();
+//
+//     //   if (title === "" || content === "") {
+//     //     alert("작성해주세요.");
+//     //     return;
+//     // }
+//     $.ajax({
+//         type: "POST",
+//         url: "/boards/board",
+//         data: {
+//             'id': userId,
+//             'title': title,
+//             'content': content
+//         },
+//         success: function (response) {
+//             alert(response["msg"]);
+//             window.location.reload();
+//         }
+//     });
+// }
+//
 
 
 </script>
