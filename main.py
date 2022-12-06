@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, session, redirect
 import pymysql
-import js2py
 import json
 import bcrypt
 
@@ -20,7 +19,7 @@ def home():
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
+    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
     curs = db.cursor()
 
     if request.method == 'POST':
@@ -72,7 +71,7 @@ def mypageSetting():
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
 def inseruser():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
+    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
     curs = db.cursor()
 
     if request.method == 'POST':
@@ -99,6 +98,45 @@ def inseruser():
         return redirect("/")
 
 
+
+
+#write 에서 포스팅하기
+@app.route('/write', methods = ['POST'])
+def insertpost():
+    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
+    curs = db.cursor()
+
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        content_image = request.form['content_image']
+        user_id = 1
+        created_at = 1
+        updated_at = 1
+        deleted = 0
+
+
+        sql = """insert into post (title, content, content_image, user_id, created_at, updated_at,deleted)
+         values (%s,%s,%s,%s,%s,%s,%s)
+        """
+        curs.execute(sql, (title, content, content_image, user_id, created_at, updated_at,deleted))
+
+        db.commit()
+        db.close()
+
+        return redirect("/")
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/logout')
 def logout():
     session.pop("name")
@@ -110,6 +148,50 @@ def logout():
 @app.route('/write')
 def write():
     return render_template('write.html')
+
+    #
+    # if "name" in session:
+    #     return render_template('write.html', name = session.get("name"), login = True)
+    # else:
+    #     return render_template('write.html', login = False)
+
+
+
+@app.route('/post')
+def post():
+    return render_template('post.html')
+
+
+@app.route('/posting', methods=['GET'])
+def get_posting():
+    print('get_posting')
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
+    curs = db.cursor()
+
+    sql = """
+    SELECT *
+    FROM post as p
+    LEFT JOIN `user` as u
+    ON p.user_id = u.id
+    """
+
+    # sql = """
+    #  SELECT *
+    #  FROM `user` as u
+    #  LEFT JOIN `group` as g
+    #    ON u.group_id = g.id
+    #   """
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    print(rows)
+
+    json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
+    db.commit()
+    db.close()
+    return json_str, 200
+
+
 
 
 

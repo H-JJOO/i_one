@@ -47,7 +47,7 @@ function save_board() {
 
 <div class="container">
   <h2>게시판 글쓰기</h2>
-  <form action="write.jsp" method="post">
+  <form action="/write" method="post">
     <div class="form-group">
       <label for="title">제목</label>
       <input type="text" class="form-control" id="title"
@@ -60,10 +60,13 @@ function save_board() {
    <textarea class="form-control" rows="5" id="content"
     name="content" placeholder="내용 작성"></textarea>
     </div>
-      <div class="info">
-          <dt>파일 첨부</dt>
-          <input type="file" id="real-input" class="image_inputType_file" accept="img/*" required multiple>
-      </div>
+
+       <input type="text" class="form-control" id="content_image" name="content_image">
+
+<!--      <div class="info">-->
+<!--          <dt>파일 첨부</dt>-->
+<!--          <input type="file" id="real-input" class="image_inputType_file" accept="img/*" required multiple>-->
+<!--      </div>-->
     <button type="submit" class="btn btn-default">작성</button>
   </form>
 </div>
