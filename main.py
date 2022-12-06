@@ -105,6 +105,19 @@ def logout():
     return redirect("/")
 
 
+#write 글쓰기 페이지
+
+@app.route('/write')
+def write():
+    return render_template('write.html')
+
+
+
+
+
+
+
+
 # 서버실행
 if __name__ == '__main__':
     app.run(host = '127.0.0.1', port = 5000, debug = True)
