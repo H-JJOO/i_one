@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% block head %}
 <link rel="stylesheet" href="/static/css/signup.css">
-<script src="/static/javascript/signup.js"></script>
+
 <title>SIGN UP</title>
 {% endblock %}
 {% block body %}
@@ -9,7 +9,7 @@
 <div>
     <div class="signup-page">
         <div class="form">
-            <form class="login-form" action="/users/signup" method="POST">
+            <form class="login-form" action="/users/signup" method="POST" id="signup_frm">
                 <select class="location" name="location" id="location">
                     <option value="">지역을 선택해 주세요.</option>
                     <option value="경기">경기</option>
@@ -44,5 +44,9 @@
         </div>
     </div>
 </div>
+<div  id="data">
+    {{ data }}
+</div>
 
 {% endblock %}
+<script src="/static/javascript/signup.js"></script>
