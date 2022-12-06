@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect
 import pymysql
 import js2py
 import json
+import bcrypt
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "abcd"
@@ -37,13 +38,12 @@ def login():
         for user in user_list:
             print(user)
             if uid == user[1]:
-                if upw == user[2]:
+                if bcrypt.checkpw(upw.encode('utf-8'), user[2].encode('utf-8')):
                     session["name"] = user[3]
                     return redirect("/")
                 else:
                     return '<script>alert("비밀번호가 틀렸습니다."); document.location.href="login"; </script>'
         return '<script>alert("아이디가 틀렸습니다."); document.location.href="login"; </script>'
-
 
         db.commit()
         db.close()
@@ -78,6 +78,9 @@ def inseruser():
     if request.method == 'POST':
         uid = request.form['userId']
         upw = request.form['password']
+
+        enc_upw = (bcrypt.hashpw(upw.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
+
         nm = request.form['name']
         gender = request.form['gender']
         email = request.form["email"]
@@ -86,7 +89,7 @@ def inseruser():
         sql = """insert into user (user_id, password, name, gender, email, location)
          values (%s,%s,%s,%s,%s,%s)
         """
-        curs.execute(sql, (uid, upw, nm, gender, email, loc))
+        curs.execute(sql, (uid, enc_upw, nm, gender, email, loc))
 
         session["name"] = nm
 
