@@ -10,8 +10,8 @@ app.config["SECRET_KEY"] = "abcd"
 # main
 @app.route('/')
 def home():
-    if "usernm" in session:
-        return render_template('main.html', usernm = session.get("usernm"), login = True)
+    if "name" in session:
+        return render_template('main.html', name = session.get("name"), login = True)
     else:
         return render_template('main.html', login = False)
 
@@ -28,17 +28,17 @@ def login():
 
         print(uid, upw)
 
-        curs.execute("SELECT * FROM t_user")
+        curs.execute("SELECT * FROM user")
 
-        t_user_list = curs.fetchall()
+        user_list = curs.fetchall()
 
-        print(t_user_list)
+        print(user_list)
 
-        for t_user in t_user_list:
-            print(t_user)
-            if uid == t_user[1]:
-                if upw == t_user[2]:
-                    session["usernm"] = t_user[3]
+        for user in user_list:
+            print(user)
+            if uid == user[1]:
+                if upw == user[2]:
+                    session["name"] = user[3]
                     return redirect("/")
                 else:
                     return '<script>alert("비밀번호가 틀렸습니다."); document.location.href="login"; </script>'
@@ -71,7 +71,7 @@ def mypageSetting():
 
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
-def insert_user():
+def inseruser():
     db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
 
@@ -83,12 +83,12 @@ def insert_user():
         email = request.form["email"]
         loc = request.form['location']
 
-        sql = """insert into t_user (uid, upw, nm, gender, email, location)
+        sql = """insert into user (user_id, password, name, gender, email, location)
          values (%s,%s,%s,%s,%s,%s)
         """
         curs.execute(sql, (uid, upw, nm, gender, email, loc))
 
-        session["usernm"] = nm
+        session["name"] = nm
 
         db.commit()
         db.close()
@@ -98,7 +98,7 @@ def insert_user():
 
 @app.route('/logout')
 def logout():
-    session.pop("usernm")
+    session.pop("name")
     return redirect("/")
 
 
