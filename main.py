@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, session, redirect
 import pymysql
-import js2py
-import json
 import bcrypt
 
 app = Flask(__name__)
@@ -27,16 +25,15 @@ def login():
         uid = request.form['userId']
         upw = request.form['password']
 
-        print(uid, upw)
+        # print(uid, upw)
 
         curs.execute("SELECT * FROM user")
 
         user_list = curs.fetchall()
 
-        print(user_list)
+        # print(user_list)
 
         for user in user_list:
-            print(user)
             if uid == user[1]:
                 if bcrypt.checkpw(upw.encode('utf-8'), user[2].encode('utf-8')):
                     session["name"] = user[3]
@@ -54,6 +51,23 @@ def login():
 # sign up
 @app.route('/users/signup')
 def signup():
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
+    # curs = db.cursor()
+    #
+    # curs.execute("SELECT * FROM user")
+    #
+    # user_list = curs.fetchall()
+    #
+    # db_list = []
+    #
+    # for user in user_list:
+    #     db_list.append(user)
+    #
+    #
+    # print(db_list)
+    #
+    # print(db_list[0])
+
     return render_template('signup.html')
 
 
@@ -89,6 +103,21 @@ def inseruser():
         sql = """insert into user (user_id, password, name, gender, email, location)
          values (%s,%s,%s,%s,%s,%s)
         """
+
+        # 중복 아이디 이메일 처리
+
+        curs.execute("SELECT * FROM user")
+
+        user_list = curs.fetchall()
+
+        for user in user_list:
+            if uid == user[1]:
+                return '<script>alert("중복된 아이디 입니다."); document.location.href="signup";</script>'
+            if email == user[5]:
+                return '<script>alert("중복된 이메일 입니다."); document.location.href="signup";</script>'
+
+        # 중복 아이디 이메일 처리
+
         curs.execute(sql, (uid, enc_upw, nm, gender, email, loc))
 
         session["name"] = nm
