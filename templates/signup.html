@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/signup.css">
+<script src="/static/javascript/signup.js"></script>
+<title>SIGN UP</title>
+{% endblock %}
+{% block body %}
+
+<div>
+    <div class="signup-page">
+        <div class="form">
+            <form class="login-form" action="/users/signup" method="POST">
+                <select class="location" name="location" id="location">
+                    <option value="">지역을 선택해 주세요.</option>
+                    <option value="경기">경기</option>
+                    <option value="서울">서울</option>
+                    <option value="인천">인천</option>
+                    <option value="강원">강원</option>
+                    <option value="충남">충남</option>
+                    <option value="충북">충북</option>
+                    <option value="대전">대전</option>
+                    <option value="경북">경북</option>
+                    <option value="경남">경남</option>
+                    <option value="대구">대구</option>
+                    <option value="부산">부산</option>
+                    <option value="울산">울산</option>
+                    <option value="전북">전북</option>
+                    <option value="전남">전남</option>
+                    <option value="광주">광주</option>
+                    <option value="제주">제주</option>
+                    <option value="해외">해외</option>
+                </select>
+                <input type="text" placeholder="사용할 ID 를 입력해주세요." name="userId" id="userId"/>
+                <input type="text" placeholder="이메일을 입력해주세요." name="email" id="email"/>
+                <input type="text" placeholder="이름을 입력해주세요." name="name" id="name"/>
+                <input type="password" placeholder="비밀번호를 입력해주세요."name="password" id="password"/>
+                <input type="password" placeholder="비밀번호를 다시 입력해주세요." id="checked_password"/>
+                <span class="gender">
+                <label><input type="radio" name="gender" value="1" checked>남성</label>
+                <label><input type="radio" name="gender" value="2">여성</label>
+                </span>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>MYPAGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mypage_topBar {
+            display: flex;
+            height: 70px;
+            justify-content: space-between;
+        }
+
+        .mypage_topBar_title {
+            margin: 10px 0px 0px 10px;
+        }
+
+        .topProfile_img {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            overflow: hidden;
+            border: 0px;
+        }
+
+        .topProfile_triangle {
+            width: 0;
+            height: 0;
+            border-top: 12px solid black;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+        }
+
+        .mypage_topBar_right {
+            display: flex;
+            margin: 10px 10px 0px 0px;
+
+        }
+
+        .mypage_write_bt {
+            margin-right: 15px;
+        }
+
+        .mypage_profile {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mypage_profile_img {
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            margin-right: 30px;
+            background-color: #EF3B3A;
+            border: 0px;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            width: 95%;
+            margin: 20px auto 0px auto;
+        }
+
+        /*스타일*/
+    </style>
+    <script>
+        // 스크립트
+    </script>
+</head>
+<body>
+<div class="mypage_topBar">
+    <div class="mypage_topBar_title">
+        <h1 class="title">홍길동의 일상</h1>
+    </div>
+    <div class="mypage_topBar_right">
+        <div class="mypage_write_bt">
+            <button type="button" class="btn btn-secondary" href="#">글쓰기</button>
+        </div>
+        <div>
+            <button class="topProfile_img"><img
+                    src="https://mediahub.seoul.go.kr/wp-content/uploads/2020/03/53552dfe5d897d0a50138605f19628a6.jpg">
+            </button>
+            <a type="button" class="topProfile_triangle" data-bs-toggle="dropdown"
+               aria-expanded="false">
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/mypage">홍길동의 일상</a></li>
+                <li><a class="dropdown-item" href="/setting">프로필 설정</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mypage_profile">
+    <img class="mypage_profile_img" src="">
+    <div class="mypage_profile_let">
+        <h3>홍길동</h3>
+        <hr>
+        <h5>저는 i-one의 조원 홍길동입니다.</h5>
+    </div>
+</div>
+<div class="wrap">
+
+</div>
+</body>
