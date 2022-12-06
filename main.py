@@ -16,6 +16,45 @@ def home():
         return render_template('main.html', login = False)
 
 
+##메인페이지에 찎어주자구
+@app.route('/', methods=['GET'])
+def home():
+    print('get_posting')
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
+    curs = db.cursor()
+
+    sql = """
+    SELECT *
+    FROM post as p
+    LEFT JOIN `user` as u
+    ON p.user_id = u.id
+    """
+
+    # sql = """
+    #  SELECT *
+    #  FROM `user` as u
+    #  LEFT JOIN `group` as g
+    #    ON u.group_id = g.id
+    #   """
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    print(rows)
+
+    json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
+    db.commit()
+    db.close()
+    return json_str, 200
+
+
+
+
+
+
+
+
+
+
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
@@ -26,16 +65,22 @@ def login():
         uid = request.form['userId']
         upw = request.form['password']
 
-        print(uid, upw)
+        session['uid'] = request.form['userId']
+        session['password'] = request.form['password']
+
+        print(session)
+        # print(session['uid'])
+
+        # print(uid, upw)
 
         curs.execute("SELECT * FROM user")
 
         user_list = curs.fetchall()
 
-        print(user_list)
+        # print(user_list)
 
         for user in user_list:
-            print(user)
+            # print(user)
             if uid == user[1]:
                 if bcrypt.checkpw(upw.encode('utf-8'), user[2].encode('utf-8')):
                     session["name"] = user[3]
@@ -105,21 +150,20 @@ def inseruser():
 def insertpost():
     db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
     curs = db.cursor()
+    print(session.get("uid"))
 
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
         content_image = request.form['content_image']
-        user_id = 1
-        created_at = 1
-        updated_at = 1
-        deleted = 0
+        user_id = session.get("uid")
 
 
-        sql = """insert into post (title, content, content_image, user_id, created_at, updated_at,deleted)
-         values (%s,%s,%s,%s,%s,%s,%s)
+
+        sql = """insert into post (title, content, content_image, user_id)
+         values (%s,%s,%s,%s)
         """
-        curs.execute(sql, (title, content, content_image, user_id, created_at, updated_at,deleted))
+        curs.execute(sql, (title, content, content_image, user_id))
 
         db.commit()
         db.close()
@@ -145,9 +189,14 @@ def logout():
 
 #write 글쓰기 페이지
 
+# @app.route('/write')
+# def write():
+#     return render_template('write.html')
+
+# write
 @app.route('/write')
 def write():
-    return render_template('write.html')
+    return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
 
     #
     # if "name" in session:
@@ -162,34 +211,7 @@ def post():
     return render_template('post.html')
 
 
-@app.route('/posting', methods=['GET'])
-def get_posting():
-    print('get_posting')
-    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
-    curs = db.cursor()
 
-    sql = """
-    SELECT *
-    FROM post as p
-    LEFT JOIN `user` as u
-    ON p.user_id = u.id
-    """
-
-    # sql = """
-    #  SELECT *
-    #  FROM `user` as u
-    #  LEFT JOIN `group` as g
-    #    ON u.group_id = g.id
-    #   """
-    curs.execute(sql)
-
-    rows = curs.fetchall()
-    print(rows)
-
-    json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
-    db.commit()
-    db.close()
-    return json_str, 200
 
 
 

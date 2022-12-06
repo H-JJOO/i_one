@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+
     <title>게시판 글쓰기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -43,7 +44,27 @@ function save_board() {
     });
 }
 
+
+
 </script>
+
+<nav>
+    <a href="main.html" class="nav__column">I-log</a>
+    <div class="nav__column">
+        {% if login == True %}
+        <h3>{{name}}님 어서오세요!</h3>
+
+        <a href="logout">로그아웃</a>
+        {% else %}
+        <a href="/users/login" class="nav__column--login-btn">로그인</a>
+        {% endif %}
+        <div><i class="fas fa-adjust fa-xl"></i></div>
+        <a href="search.html" class="nav__column--search-btn">
+            <i class="fas fa-search fa-xl"></i>
+        </a>
+    </div>
+</nav>
+
 
 <div class="container">
   <h2>게시판 글쓰기</h2>
@@ -61,12 +82,14 @@ function save_board() {
     name="content" placeholder="내용 작성"></textarea>
     </div>
 
-       <input type="text" class="form-control" id="content_image" name="content_image">
+<!--       <input type="text" class="form-control" id="content_image" name="content_image">-->
 
-<!--      <div class="info">-->
-<!--          <dt>파일 첨부</dt>-->
-<!--          <input type="file" id="real-input" class="image_inputType_file" accept="img/*" required multiple>-->
-<!--      </div>-->
+            <input type="file"   id="content_image" name="content_image" class="image_inputType_file" accept="img/*" required multiple>
+
+      <div class="info">
+          <dt>파일 첨부</dt>
+<!--          <input type="file" id="realinput" class="image_inputType_file" accept="img/*" required multiple>-->
+      </div>
     <button type="submit" class="btn btn-default">작성</button>
   </form>
 </div>
