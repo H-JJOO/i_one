@@ -18,7 +18,8 @@ def home():
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
     curs = db.cursor()
 
     if request.method == 'POST':
@@ -37,6 +38,8 @@ def login():
             if uid == user[1]:
                 if bcrypt.checkpw(upw.encode('utf-8'), user[2].encode('utf-8')):
                     session["name"] = user[3]
+                    session["userid"] = user[1]
+                    session["id"] = user[0]
                     return redirect("/")
                 else:
                     return '<script>alert("비밀번호가 틀렸습니다."); document.location.href="login"; </script>'
@@ -51,42 +54,65 @@ def login():
 # sign up
 @app.route('/users/signup')
 def signup():
-    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
-    # curs = db.cursor()
-    #
-    # curs.execute("SELECT * FROM user")
-    #
-    # user_list = curs.fetchall()
-    #
-    # db_list = []
-    #
-    # for user in user_list:
-    #     db_list.append(user)
-    #
-    #
-    # print(db_list)
-    #
-    # print(db_list[0])
-
     return render_template('signup.html')
 
 
 # 마이페이지
 @app.route('/mypage')
 def mypage():
-    return render_template('mypage.html')
+    if "name" in session:
+        db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
+                             db = 'ione',
+                             password = 'ione1234', charset = 'utf8')
+        curs = db.cursor()
+
+        curs.execute("SELECT * FROM user")
+
+        user_list = curs.fetchall()
+
+        print(user_list)
+
+        print(session["name"])
+        return render_template('mypage.html', name = session.get("name"), login = True)
+    else:
+        return render_template('login.html', login = False)
 
 
-# 프로필 수정 페이지
-@app.route('/setting')
-def mypageSetting():
-    return render_template('mypage_setting.html')
+# # 프로필 수정 페이지
+# @app.route('/mypage/edit', methods = ['GET', 'POST'])
+# def mypageedit():
+#     if "name" in session:
+#         db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
+#                              db = 'ione',
+#                              password = 'ione1234', charset = 'utf8')
+#         curs = db.cursor()
+#
+#         if request.method == 'POST':
+#             intro = request.form['intro']
+#             session_id = session["id"]
+#
+#             if curs.execute("SELECT id FROM mypage") == session_id:
+#                 curs.execute("UPDATE mypage SET introduction = intro WHERE id = session_id")
+#             else:
+#                 sql = """insert into mypage (introduce)
+#                                  values (%s)
+#                                 """
+#                 curs.execute(sql, intro)
+#
+#             db.commit()
+#             db.close()
+#
+#         return render_template('mypage_edit.html', name = session.get("name"), login = True)
+#
+#     else:
+#         return render_template('login.html', login = False)
 
 
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
-def inseruser():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one', password = 'M@ansghkwo12', charset = 'utf8')
+def insertuser():
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
     curs = db.cursor()
 
     if request.method == 'POST':
@@ -123,9 +149,10 @@ def inseruser():
         session["name"] = nm
 
         db.commit()
-        db.close()
 
-        return redirect("/")
+    db.close()
+
+    return redirect("/")
 
 
 @app.route('/logout')

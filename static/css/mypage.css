@@ -1,0 +1,61 @@
+* {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.mypage_topBar {
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+}
+
+.mypage_topBar_title {
+    margin: 10px 0px 0px 10px;
+}
+
+.topProfile_img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 0px;
+}
+
+.topProfile_triangle {
+    width: 0;
+    height: 0;
+    border-top: 12px solid black;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+
+.mypage_topBar_right {
+    display: flex;
+    margin: 10px 10px 0px 0px;
+
+}
+
+.mypage_write_bt {
+    margin-right: 15px;
+}
+
+.mypage_profile {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mypage_profile_img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin-right: 30px;
+    background-color: #EF3B3A;
+    border: 0px;
+}
+
+.wrap {
+    max-width: 1200px;
+    width: 95%;
+    margin: 20px auto 0px auto;
+}
