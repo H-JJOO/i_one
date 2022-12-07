@@ -1,0 +1,36 @@
+
+* {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.mypage_profile_img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    margin-right: 30px;
+    background-color: #EF3B3A;
+    border: 0px;
+}
+
+.setting_input {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.inputBar {
+    margin-left: 50px;
+    margin-top: 200px;
+    width: 500px;
+}
+
+.setting_img {
+    width: 150px;
+    height: 150px;
+}
