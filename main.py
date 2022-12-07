@@ -17,25 +17,15 @@ def home():
 
 
 ##메인페이지에 찎어주자구
-@app.route('/', methods=['GET'])
-def home():
-    print('get_posting')
-    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
+@app.route('/feed', methods=['GET'])
+def get_posts():
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
     curs = db.cursor()
 
-    sql = """
-    SELECT *
-    FROM post as p
-    LEFT JOIN `user` as u
-    ON p.user_id = u.id
-    """
+    sql = "select * from post"
+    print(sql)
 
-    # sql = """
-    #  SELECT *
-    #  FROM `user` as u
-    #  LEFT JOIN `group` as g
-    #    ON u.group_id = g.id
-    #   """
     curs.execute(sql)
 
     rows = curs.fetchall()
@@ -48,17 +38,11 @@ def home():
 
 
 
-
-
-
-
-
-
-
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
     curs = db.cursor()
 
     if request.method == 'POST':
@@ -66,7 +50,7 @@ def login():
         upw = request.form['password']
 
         session['uid'] = request.form['userId']
-        session['password'] = request.form['password']
+        # session['password'] = request.form['password']
 
         print(session)
         # print(session['uid'])
@@ -84,6 +68,7 @@ def login():
             if uid == user[1]:
                 if bcrypt.checkpw(upw.encode('utf-8'), user[2].encode('utf-8')):
                     session["name"] = user[3]
+                    # session["userid"] = user[1]
                     return redirect("/")
                 else:
                     return '<script>alert("비밀번호가 틀렸습니다."); document.location.href="login"; </script>'
@@ -116,9 +101,9 @@ def mypageSetting():
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
 def inseruser():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
     curs = db.cursor()
-
     if request.method == 'POST':
         uid = request.form['userId']
         upw = request.form['password']
@@ -148,7 +133,8 @@ def inseruser():
 #write 에서 포스팅하기
 @app.route('/write', methods = ['POST'])
 def insertpost():
-    db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_log', password = 'abc1234', charset = 'utf8')
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
     curs = db.cursor()
     print(session.get("uid"))
 
@@ -157,8 +143,6 @@ def insertpost():
         content = request.form['content']
         content_image = request.form['content_image']
         user_id = session.get("uid")
-
-
 
         sql = """insert into post (title, content, content_image, user_id)
          values (%s,%s,%s,%s)
@@ -172,15 +156,6 @@ def insertpost():
 
 
 
-
-
-
-
-
-
-
-
-
 @app.route('/logout')
 def logout():
     session.pop("name")
@@ -188,12 +163,6 @@ def logout():
 
 
 #write 글쓰기 페이지
-
-# @app.route('/write')
-# def write():
-#     return render_template('write.html')
-
-# write
 @app.route('/write')
 def write():
     return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
@@ -203,23 +172,6 @@ def write():
     #     return render_template('write.html', name = session.get("name"), login = True)
     # else:
     #     return render_template('write.html', login = False)
-
-
-
-@app.route('/post')
-def post():
-    return render_template('post.html')
-
-
-
-
-
-
-
-
-
-
-
 
 
 # 서버실행
