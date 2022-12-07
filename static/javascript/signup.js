@@ -8,16 +8,18 @@
     const emailRegex = /^(?=.{8,50}$)([0-9a-z_]{4,})@([0-9a-z][0-9a-z\-]*[0-9a-z]\.)?([0-9a-z][0-9a-z\-]*[0-9a-z])\.([a-z]{2,15})(\.[a-z]{2})?$/; // 이메일
 
     if (signupFrmElem) {
-        console.log('test')
+
         signupFrmElem.addEventListener('submit', (e) => {
-            const inputId = document.querySelector('#userId')
-            const inputPw = document.querySelector('#password')
-            const inputCheckPw = document.querySelector('#checked_password')
-            const inputNm = document.querySelector('#name')
-            const inputEmail = document.querySelector('#email')
+            const inputId = signupFrmElem.userId.value;
+            const inputPw = signupFrmElem.password.value;
+            const inputCheckPw = signupFrmElem.checked_password.value;
+            const inputNm = signupFrmElem.name.value;
+            const inputEmail = signupFrmElem.email.value;
 
 
             if (!idRegex.test(inputId)) {
+                console.log(idRegex)
+                console.log(inputId)
                 alert('아이디는 대소문자, 숫자조합으로 4~20자 되어야 합니다.');
                 e.preventDefault();
                 document.querySelector('#userId').scrollIntoView();
@@ -38,7 +40,7 @@
                 e.preventDefault();
                 document.querySelector('#email').scrollIntoView();
             } else {
-                alert('회원가입에 성공하였습니다.')
+
             }
 
         });
