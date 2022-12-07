@@ -52,7 +52,7 @@
     <a href="main.html" class="nav__column">I-log</a>
     <div class="nav__column">
         {% if login == True %}
-        <h3>{{name}}님 어서오세요!</h3>
+        <h3>{{id}} {{name}}님 어서오세요!</h3>
 
         <a href="logout">로그아웃</a>
         {% else %}
@@ -84,7 +84,7 @@
 
 <!--       <input type="text" class="form-control" id="content_image" name="content_image">-->
 
-            <input type="file"   id="content_image" name="content_image" class="image_inputType_file" accept="img/*" required multiple>
+            <input type="file"   id="content_image" name="content_image" class="image_inputType_file" accept="img/*"  multiple>
 
 <!--      <div class="info">-->
 <!--          <dt>파일 첨부</dt>-->

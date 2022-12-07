@@ -52,7 +52,10 @@ def login():
         session['uid'] = request.form['userId']
         # session['password'] = request.form['password']
 
+        print('Login OKAY!')
+        print(session['uid'])
         print(session)
+
         # print(session['uid'])
 
         # print(uid, upw)
@@ -115,6 +118,8 @@ def inseruser():
         email = request.form["email"]
         loc = request.form['location']
 
+        print(session['nm'])
+
         sql = """insert into user (user_id, password, name, gender, email, location)
          values (%s,%s,%s,%s,%s,%s)
         """
@@ -127,6 +132,18 @@ def inseruser():
 
         return redirect("/")
 
+
+#write 글쓰기 페이지
+@app.route('/write')
+def write():
+    # return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
+    return render_template('write.html', id = session.get("uid"), name=session.get("name"), login=True)
+
+    #
+    # if "name" in session:
+    #     return render_template('write.html', name = session.get("name"), login = True)
+    # else:
+    #     return render_template('write.html', login = False)
 
 
 
@@ -143,6 +160,7 @@ def insertpost():
         content = request.form['content']
         content_image = request.form['content_image']
         user_id = session.get("uid")
+        # user_id = session.get("name")
 
         sql = """insert into post (title, content, content_image, user_id)
          values (%s,%s,%s,%s)
@@ -160,18 +178,6 @@ def insertpost():
 def logout():
     session.pop("name")
     return redirect("/")
-
-
-#write 글쓰기 페이지
-@app.route('/write')
-def write():
-    return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
-
-    #
-    # if "name" in session:
-    #     return render_template('write.html', name = session.get("name"), login = True)
-    # else:
-    #     return render_template('write.html', login = False)
 
 
 # 서버실행
