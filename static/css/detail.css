@@ -1,0 +1,50 @@
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.detail_img {
+
+    width: 500px;
+    height: 400px;
+
+    color: white;
+
+    text-align: center;
+
+    background-image: url();
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 10px;
+
+    padding-top: 40px;
+}
+
+.detail_wrap {
+    width: 1000px;
+    margin: auto;
+
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.bt_wrap {
+    width: 1000px;
+    margin: auto;
+
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+button {
+    width: 100px;
+    background-color: black;
+}
+
+button > a {
+    color: white;
+}

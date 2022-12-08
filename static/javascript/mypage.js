@@ -18,23 +18,27 @@ $(document).ready(function () {
             </div>
             <div class="mypage_name">
                 이름 : ${name}
+                <hr>
             </div>
             <div class="mypage_email">
                 이메일 : ${email}
+                <hr>
             </div>
             <div class="mypage_gender">
                 성별 : ${gender}
+                <hr>
             </div>
             <div class="mypage_location">
                 지역 : ${location}
+                <hr>
             </div>
             <div class="mypage_intro">
-                자기소개 : <p>${intro}</p> 
+                자기소개 : <p>${intro}</p>
+                <hr> 
             </div>
-            
             <div class="editbtn">
                 <button class="mybtn" type="button"><a href="/mypage/edit">프로필 수정</a></button>
-                <button class="homebtn" type="button"><a href="/mypage">홈으로</a></button>
+                <button class="homebtn" type="button"><a href="/">홈으로</a></button>
             </div>
        </div>
     </div>

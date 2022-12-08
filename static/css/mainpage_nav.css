@@ -8,7 +8,14 @@ nav {
   align-items: center;
 
   cursor: pointer;
+
 }
+
+nav > a {
+  text-decoration: none;
+}
+
+
 
 .nav__column:nth-child(1) {
   color:#575a5e;

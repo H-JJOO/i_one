@@ -1,0 +1,22 @@
+.btn-default {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.nav__column {
+
+    color: #575a5e;
+    font-size: 1.125rem;
+    font-weight: 500;
+    font-family: 'Fira Mono';
+}
+
+
+
+.nav__column:first-child {
+    font-size: 18px;
+}
+
+
+
