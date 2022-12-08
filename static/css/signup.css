@@ -2,7 +2,7 @@
 
 .signup-page {
     width: 500px;
-    padding: 10% 0 0;
+    padding: -10% 0 0;
     margin: auto;
 }
 
@@ -126,4 +126,9 @@ body {
 .gender > label {
     display: inline-block;
     margin: 20px;
+}
+
+
+textarea {
+    margin-bottom: 20px;
 }

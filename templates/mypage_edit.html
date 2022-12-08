@@ -1,48 +1,55 @@
 {% extends 'main.html' %}
 {% block head %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/mypage_edit.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
 <script src="/static/javascript/mypage_edit.js"></script>
 <title>프로필 수정</title>
 {% endblock %}
 {% block body %}
-<nav>
-    <a href="/" class="nav__column">I-log</a>
-    <div class="nav__column">
-        {% if login == True %}
-        <a href="write" class="nav__column--login-btn">글쓰기</a>
-        <a href="/mypage" class="nav__column--login-btn">마이페이지</a>
-        <a href="logout" class="nav__column--login-btn">로그아웃</a>
-        {% else %}
-        <a href="/users/login" class="nav__column--login-btn">로그인</a>
-        {% endif %}
-    </div>
-</nav>
-<div class="setting_input">
-    <div class="setting_img">
-        <div class="mypage_profile">
-            <img class="mypage_profile_img" src="">
-        </div>
-        <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 20px; width: 150px">
-            <button class="btn btn-primary" type="button">이미지 업로드</button>
-            <button class="btn btn-primary" type="button">이미지 삭제</button>
-        </div>
-    </div>
-    <form action="/mypage/edit" method="post">
-        <div class="inputBar">
-            <div class="mb-3">
-                <label for="settingIntroduction" class="form-label">소개</label>
-                <input type="text" class="form-control" id="settingIntroduction" placeholder="자기소개를 부탁드려요~" name="intro">
-            </div>
-            <input type="submit" value="수정">
-        </div>
-    </form>
-
+<div class="myedit_main">
+<!--    <div class="myedit_mid">-->
+<!--        <div class="myedit_midbox">-->
+<!--            <div class="myedit_img">-->
+<!--                <img src="../static/img/default-user-image.png" id="user_image">-->
+<!--            </div>-->
+<!--            <div class="img_button">-->
+<!--                <label class="editlabel" for="img_edit">-->
+<!--                <div class="btn-upload">사진 업로드</div>-->
+<!--                </label>-->
+<!--                <input class="myedit_imgupload" type="file" id="img_edit"/>-->
+<!--                &lt;!&ndash;                사진삭제 변경 필요&ndash;&gt;-->
+<!--                <button class="myedit_imgdel">-->
+<!--                    사진 삭제-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label><p>이름</p></label>-->
+<!--            <input class="myedit_name" value="${name}" id="name_edit">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label><p>이메일 변경</p></label>-->
+<!--            <input class="myedit_email" value="${email}" id="email_edit">-->
+<!--        </div>-->
+<!--        자기 소개 변경-->
+<!--        <div>-->
+<!--            <textarea class="myedit_intro">${intro}-->
+<!--            </textarea>-->
+<!--        </div>-->
+<!--        <div class="myedit_bottom">-->
+<!--            <button class="okbtn">-->
+<!--                확인-->
+<!--            </button>-->
+<!--            <a href="/mypage">-->
+<!--                <button type="button" class="cancelbtn">취소</button>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
+<!--javascript 적용이 안되는게 있을때는 body 태그 맨 아래 해주면 된다고 합니다.-->
 {% endblock %}
+
+
+
+
+
