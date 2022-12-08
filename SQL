@@ -9,7 +9,8 @@ name VARCHAR(10) NOT NULL,
 gender TINYINT UNSIGNED CHECK (gender IN (1, 2)),
 email VARCHAR(50) UNIQUE NOT NULL,
 location VARCHAR(10),
-profile_image VARCHAR(100)
+profile_image VARCHAR(100),
+intro VARCHAR(00)
 );
 
 -- post 테이블 생성
