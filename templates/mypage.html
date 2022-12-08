@@ -2,6 +2,8 @@
 {% block head %}
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/mypage.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/javascript/mypage.js"></script>
 <title>MYPAGE</title>
 {% endblock %}
 {% block body %}
@@ -17,27 +19,17 @@
         {% endif %}
     </div>
 </nav>
-<div class="mypage_topBar">
-    <div class="mypage_topBar_title">
-        <h1 class="title">{{name}}의 일상</h1>
-    </div>
-    <div class="mypage_topBar_right">
-        <div>
-            <a class="nav__column--login-btn" href="/mypage/edit">프로필수정</a>
-        </div>
-    </div>
+<div class="mypage_main">
+
 </div>
-<div class="mypage_profile">
+<div class="mypage_profile" >
     <img class="mypage_profile_img" src="">
-    <div class="mypage_profile_let">
-        <h3>이름 : {{name}}</h3>
-        <hr>
-        <h3>email : </h3>
-        <hr>
-        <h3>소개 : </h3>
+    <div class="mypage_profile_let" id="load">
+
 
     </div>
 </div>
 <div class="wrap">
 </div>
+
 {% endblock %}

@@ -1,9 +1,20 @@
-from flask import Flask, render_template, request, session, redirect
-import pymysql
+import os
+
 import bcrypt
+import pymysql
+from flask import Flask, render_template, request, session, redirect, jsonify
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'static/img'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "abcd"
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 # main
@@ -42,8 +53,8 @@ def login():
                     session["id"] = user[0]
                     return redirect("/")
                 else:
-                    return '<script>alert("비밀번호가 틀렸습니다."); document.location.href="login"; </script>'
-        return '<script>alert("아이디가 틀렸습니다."); document.location.href="login"; </script>'
+                    return '<script>alert("비밀번호가 일치하지 않습니다."); document.location.href="login"; </script>'
+        return '<script>alert("존재하지 않는 아이디입니다.."); document.location.href="login"; </script>'
 
         db.commit()
         db.close()
@@ -61,51 +72,83 @@ def signup():
 @app.route('/mypage')
 def mypage():
     if "name" in session:
+        return render_template('mypage.html', name = session.get("name"), login = True)
+    return render_template("mypage.html")
+
+
+# 프로필 수정 페이지
+@app.route('/mypage/edit')
+def mypage_edit():
+    return render_template("mypage_edit.html")
+
+
+# 페이지 DB GET 정보
+@app.route('/users/<id>', methods = ['GET'])
+def get_users(id):
+    if "name" in session:
         db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
-                             db = 'ione',
-                             password = 'ione1234', charset = 'utf8')
+                             db = 'ione', password = 'ione1234', charset = 'utf8')
         curs = db.cursor()
 
-        curs.execute("SELECT * FROM user")
+        sql = '''SELECT user_id, name, gender, email, location, profile_image, intro FROM `user`'''
 
-        user_list = curs.fetchall()
+        curs.execute(sql)
 
-        print(user_list)
+        rows = curs.fetchall()
 
-        print(session["name"])
-        return render_template('mypage.html', name = session.get("name"), login = True)
-    else:
-        return render_template('login.html', login = False)
+        # [session['id'] - 1] : 세션에 id 값이 담기는데 index 값보다 1이 많아서 -1 해줬습니다~
+
+        result = {
+            "user_id": rows[session['id'] - 1][0],
+            "name": rows[session['id'] - 1][1],
+            "gender": rows[session['id'] - 1][2],
+            "email": rows[session['id'] - 1][3],
+            "location": rows[session['id'] - 1][4],
+            "profile_image": rows[session['id'] - 1][5],
+            "intro": rows[session['id'] - 1][6]
+        }
+
+        db.commit()
+        db.close()
+
+        return jsonify({'users': result}), 200
 
 
-# # 프로필 수정 페이지
-# @app.route('/mypage/edit', methods = ['GET', 'POST'])
-# def mypageedit():
-#     if "name" in session:
-#         db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
-#                              db = 'ione',
-#                              password = 'ione1234', charset = 'utf8')
-#         curs = db.cursor()
-#
-#         if request.method == 'POST':
-#             intro = request.form['intro']
-#             session_id = session["id"]
-#
-#             if curs.execute("SELECT id FROM mypage") == session_id:
-#                 curs.execute("UPDATE mypage SET introduction = intro WHERE id = session_id")
-#             else:
-#                 sql = """insert into mypage (introduce)
-#                                  values (%s)
-#                                 """
-#                 curs.execute(sql, intro)
-#
-#             db.commit()
-#             db.close()
-#
-#         return render_template('mypage_edit.html', name = session.get("name"), login = True)
-#
-#     else:
-#         return render_template('login.html', login = False)
+# user DB 수정
+@app.route('/users/<id>', methods = ["PUT"])
+def put_users(id):
+    if "name" in session:
+        db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
+                             db = 'ione', password = 'ione1234', charset = 'utf8')
+        curs = db.cursor()
+
+        name = request.form["name"]
+        email = request.form["email"]
+        intro = request.form["intro"]
+        # file = request.files['file']
+        #
+        # if file.filename == '':
+        #     return redirect(request.url)
+        # if file and allowed_file(file.filename):
+        #     filename = secure_filename(file.filename)
+        #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #
+        # profile_image = file.filename
+
+        # sql = '''UPDATE `user` SET name=%s, email=%s, intro=%s, profile_image=%s WHERE id =%s'''
+
+        sql = '''UPDATE `user` SET name=%s, email=%s, intro=%s WHERE id =%s'''
+
+        # curs.execute(sql, (name, email, intro, profile_image, session["id"]))
+
+        curs.execute(sql, (name, email, intro, session["id"]))
+
+        session["name"] = name
+
+        db.commit()
+        db.close()
+
+        return jsonify({'msg': '수정이 완료되었습니다'}), 200
 
 
 # sign up, INSERT
@@ -125,9 +168,10 @@ def insertuser():
         gender = request.form['gender']
         email = request.form["email"]
         loc = request.form['location']
+        intro = request.form['intro']
 
-        sql = """insert into user (user_id, password, name, gender, email, location)
-         values (%s,%s,%s,%s,%s,%s)
+        sql = """insert into user (user_id, password, name, gender, email, location, intro)
+         values (%s,%s,%s,%s,%s,%s,%s)
         """
 
         # 중복 아이디 이메일 처리
@@ -144,7 +188,7 @@ def insertuser():
 
         # 중복 아이디 이메일 처리
 
-        curs.execute(sql, (uid, enc_upw, nm, gender, email, loc))
+        curs.execute(sql, (uid, enc_upw, nm, gender, email, loc, intro))
 
         session["name"] = nm
 
