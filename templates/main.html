@@ -26,6 +26,7 @@
 <meta name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 {% block head %}
 <title>Main</title>
 {% endblock %}
@@ -36,18 +37,17 @@
 
 {% block body %}
 <nav>
-    <a href="main.html" class="nav__column">I-log</a>
+    <a href="/" class="nav__column">I-log</a>
     <div class="nav__column">
         {% if login == True %}
         <h3>{{name}}님 어서오세요!</h3>
-        <a href="logout">로그아웃</a>
+        <a href="write" class="nav__column--login-btn">글쓰기</a>
+        <a href="mypage" class="nav__column--login-btn">마이페이지</a>
+        <a href="logout" class="nav__column--login-btn">로그아웃</a>
+
         {% else %}
         <a href="/users/login" class="nav__column--login-btn">로그인</a>
         {% endif %}
-        <div><i class="fas fa-adjust fa-xl"></i></div>
-        <a href="search.html" class="nav__column--search-btn">
-            <i class="fas fa-search fa-xl"></i>
-        </a>
     </div>
 </nav>
 

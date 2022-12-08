@@ -1,0 +1,148 @@
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.myedit_main {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.myedit_header {
+    width: 100%;
+    height: 7rem;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+.myedit_mid {
+    width: 90%;
+    height: 68rem;
+    margin: 100px auto;
+    padding: 30px;
+    text-align: center;
+    /*border: 1px solid #000;*/
+}
+
+.myedit_midbox {
+    width: 50rem;
+    height: 20rem;
+    margin: auto auto 5px auto;
+    display: flex;
+    /*border: 1px solid #000;*/
+}
+
+.myedit_img {
+    width: 19rem;
+    height: 19rem;
+    margin: auto 70px auto;
+    /*border: 1px solid #000;*/
+    overflow: hidden;
+}
+
+#user_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img_button {
+    height: 100px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+    padding: 30px;
+    /*border: 1px solid #000;*/
+}
+
+/*.myedit_imgupload {*/
+/*    margin: 0 10px 0 10px;*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    border: 1px solid #000;*/
+/*}*/
+
+.myedit_imgdel {
+    margin: 0 10px 0 10px;
+    width: 100px;
+    height: 100px;
+    /*border: 1px solid #000;*/
+    border-radius: 20px;
+    border-width: 1px;
+    font-size: 16px;
+}
+
+.myedit_name {
+    width: 50rem;
+    height: 4rem;
+    margin: 5px auto 5px auto;
+    font-size: 2rem;
+    /*border: 1px solid #000;*/
+    text-align: center;
+}
+
+.myedit_email {
+    width: 50rem;
+    height: 4rem;
+    margin: 5px auto 5px auto;
+    font-size: 1.75rem;
+    /*border: 1px solid #000;*/
+    text-align: center;
+    /*background-color: #f0f0f0;*/
+}
+
+.myedit_intro {
+    width: 50rem;
+    height: 10rem;
+    font-size: 1rem;
+    margin: 5px auto 5px auto;
+    /*border: 1px solid #000;*/
+    text-align: center;
+}
+
+.myedit_bottom {
+    width: 15rem;
+    height: 5rem;
+    margin: 30px auto;
+    /*border: 1px solid #000;*/
+    text-align: center;
+    line-height: 5rem;
+    padding: 30px 0px 0px 0px;
+}
+
+.okbtn {
+    width: 7rem;
+    height: 3rem;
+    border-radius: 15px;
+    border-width: 1px;
+}
+
+.cancelbtn {
+    width: 7rem;
+    height: 3rem;
+    border-radius: 15px;
+    border-width: 1px;
+}
+
+
+.btn-upload {
+    margin: 0 10px 0 10px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    line-height: 6rem;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+}
+
+.myedit_imgupload {
+    display: none;
+}
+
+.name_edit {
+    width: 10rem;
+}

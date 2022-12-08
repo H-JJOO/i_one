@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/mypage_edit.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/static/javascript/mypage_edit.js"></script>
+<title>프로필 수정</title>
+{% endblock %}
+{% block body %}
+<div class="myedit_main">
+<!--    <div class="myedit_mid">-->
+<!--        <div class="myedit_midbox">-->
+<!--            <div class="myedit_img">-->
+<!--                <img src="../static/img/default-user-image.png" id="user_image">-->
+<!--            </div>-->
+<!--            <div class="img_button">-->
+<!--                <label class="editlabel" for="img_edit">-->
+<!--                <div class="btn-upload">사진 업로드</div>-->
+<!--                </label>-->
+<!--                <input class="myedit_imgupload" type="file" id="img_edit"/>-->
+<!--                &lt;!&ndash;                사진삭제 변경 필요&ndash;&gt;-->
+<!--                <button class="myedit_imgdel">-->
+<!--                    사진 삭제-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label><p>이름</p></label>-->
+<!--            <input class="myedit_name" value="${name}" id="name_edit">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label><p>이메일 변경</p></label>-->
+<!--            <input class="myedit_email" value="${email}" id="email_edit">-->
+<!--        </div>-->
+<!--        자기 소개 변경-->
+<!--        <div>-->
+<!--            <textarea class="myedit_intro">${intro}-->
+<!--            </textarea>-->
+<!--        </div>-->
+<!--        <div class="myedit_bottom">-->
+<!--            <button class="okbtn">-->
+<!--                확인-->
+<!--            </button>-->
+<!--            <a href="/mypage">-->
+<!--                <button type="button" class="cancelbtn">취소</button>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+<!--javascript 적용이 안되는게 있을때는 body 태그 맨 아래 해주면 된다고 합니다.-->
+{% endblock %}
+
+
+
+
+
