@@ -1,51 +1,114 @@
-import os
-
-import bcrypt
-import pymysql
 from flask import Flask, render_template, request, session, redirect, jsonify
-from werkzeug.utils import secure_filename
+import os
+import pymysql
+import json
+import bcrypt
 
-UPLOAD_FOLDER = 'static/img'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+from flask_paginate import Pagination,get_page_args
+# from werkzeug.utils import secure_filename
+# UPLOAD_FOLDER = 'static/img'
+# ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "abcd"
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# def allowed_file(filename):
+#     return '.' in filename and \
+#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 # main
 @app.route('/')
 def home():
+    per_page = 6
+    page, _, offset = get_page_args(per_page=per_page)  # page 기본값 1 offset 0 _ 뜻은 per paper / 포스트 10개씩 페이지네이션
+    print(page, _, offset)
+
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+    curs = db.cursor()
+
+    curs.execute("SELECT COUNT(*) FROM post;")
+
+    all_count = curs.fetchall()[0][0]
+
+    curs.execute("SELECT * FROM post ORDER BY `created_at` DESC LIMIT %s OFFSET %s;", (per_page, offset))
+    data_list = curs.fetchall()
+
+    db.commit()
+    db.close()
+
+    pagination = Pagination(page=page, per_page=per_page, total=all_count, record_name='post',
+                            css_framework='foundation', bs_version=5)
+
+    #
+    # if "id" not in session:
+    #     id = None;
+    #     name = None;
+    #     return render_template('main.html', data_lists=data_list, pagination=pagination, id=id, name=name)
+    #
+    # return render_template('main.html', data_lists=data_list, pagination=pagination, id=session["id"],
+    #                        name=session["name"], css_framework='foundation', bs_version=5)
+    #
     if "name" in session:
-        return render_template('main.html', name = session.get("name"), login = True)
+        return render_template('main.html', data_lists=data_list,   pagination=pagination, name = session.get("name"), login = True)
     else:
-        return render_template('main.html', login = False)
+        return render_template('main.html', data_lists=data_list,   pagination=pagination, login = False)
+
+
+# ##메인페이지에 찎어주자구
+# @app.route('/feed', methods=['GET'])
+# def get_posts():
+#     db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+#                          password='ione1234', charset='utf8')
+#     curs = db.cursor()
+#
+#     sql = "select * from post"
+#     print(sql)
+#
+#     curs.execute(sql)
+#
+#     rows = curs.fetchall()
+#     print(rows)
+#
+#     json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
+#     db.commit()
+#     db.close()
+#     return json_str, 200
+#
 
 
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+
     curs = db.cursor()
 
     if request.method == 'POST':
         uid = request.form['userId']
         upw = request.form['password']
 
-        # print(uid, upw)
+        # session['uid'] = request.form['userId']
+
+        # print('Login OKAY!')
+        # print(session['uid'])
+        # print(session['password'])
+        # print(session)
+
+        # print(session['uid'])
+
+
 
         curs.execute("SELECT * FROM user")
 
         user_list = curs.fetchall()
 
-        # print(user_list)
-
         for user in user_list:
+
             if uid == user[1]:
                 if bcrypt.checkpw(upw.encode('utf-8'), user[2].encode('utf-8')):
                     session["name"] = user[3]
@@ -153,11 +216,11 @@ def put_users(id):
 
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
+
 def insertuser():
     db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
                          password = 'ione1234', charset = 'utf8')
     curs = db.cursor()
-
     if request.method == 'POST':
         uid = request.form['userId']
         upw = request.form['password']
@@ -169,6 +232,7 @@ def insertuser():
         email = request.form["email"]
         loc = request.form['location']
         intro = request.form['intro']
+
 
         sql = """insert into user (user_id, password, name, gender, email, location, intro)
          values (%s,%s,%s,%s,%s,%s,%s)
@@ -197,6 +261,48 @@ def insertuser():
     db.close()
 
     return redirect("/")
+
+
+#write 글쓰기 페이지
+@app.route('/write')
+def write():
+    # return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
+    return render_template('write.html', id = session.get("uid"), name=session.get("name"), login=True)
+
+
+    #
+    # if "name" in session:
+    #     return render_template('write.html', name = session.get("name"), login = True)
+    # else:
+    #     return render_template('write.html', login = False)
+
+
+
+#write 에서 포스팅하기
+@app.route('/write', methods = ['POST'])
+def insertpost():
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+    curs = db.cursor()
+    print(session.get("uid"))
+
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        content_image = request.form['content_image']
+        user_id = session.get("uid")
+        # user_id = session.get("name")
+
+        sql = """insert into post (title, content, content_image, user_id)
+         values (%s,%s,%s,%s)
+        """
+        curs.execute(sql, (title, content, content_image, user_id))
+
+        db.commit()
+        db.close()
+
+        return redirect("/")
+
 
 
 @app.route('/logout')
