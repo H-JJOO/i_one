@@ -1,48 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/static/css/detail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--    <link rel="stylesheet" href="../static/css/view.css"/>-->
     <title>상세페이지</title>
-        <style>
-        .detail_img {
-
-            width: 500px;
-            height: 400px;
-
-            color: white;
-
-            text-align: center;
-
-            background-image: url();
-            background-size: cover;
-            background-position: center;
-
-            border-radius: 10px;
-
-            padding-top: 40px;
-        }
-        .detail_wrap {
-            width: 1000px;
-            margin: auto;
-
-            margin-top: 10px;
-            text-align: center;
-            font-size: 15px;
-        }
-        .bt_wrap {
-            width: 1000px;
-            margin: auto;
-
-            margin-top: 10px;
-            text-align: center;
-            font-size: 15px;
-        }
-    </style>
 </head>
 
 <body>
@@ -80,11 +45,13 @@
 </div>
 </div>
 <div class="bt_wrap">
-    <a href="/edit/{{ list[0][0] }}">수정</a>
-    <a href="/delete/{{ list[0][0] }}">삭제</a>
+    <button><a href="/edit/{{ list[0][0] }}">수정</a></button>
+    <button><a href="/delete/{{ list[0][0] }}">삭제</a></button>
+
 
     {# <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>#}
-    <a href="/" onclick="window.location.reload()">나가기</a>
+    <button><a href="/" onclick="window.location.reload()">나가기</a></button>
+
 </div>
 </body>
 </html>

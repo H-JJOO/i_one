@@ -29,14 +29,14 @@ $(document).ready(function () {
             </div>
         </div>
         <div>
-            <label><p>이름</p></label>
+            <label><p>[이름]</p></label>
             <input class="myedit_name"  value="${name}" id="name_edit">
         </div>
         <div>
-            <label><p>이메일 변경</p></label>
+            <label><p>[이메일 변경]</p></label>
             <input class="myedit_email" value="${email}" id="email_edit">
         </div>
-        자기 소개 변경
+        <p>[자기 소개 변경]</p>
         <div>
             <textarea class="myedit_intro">${intro}</textarea>
         </div>

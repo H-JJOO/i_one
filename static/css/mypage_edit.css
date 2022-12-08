@@ -20,12 +20,13 @@
 }
 
 .myedit_mid {
-    width: 90%;
-    height: 68rem;
+    width: 70%;
+    height: 58rem;
     margin: 100px auto;
     padding: 30px;
     text-align: center;
     /*border: 1px solid #000;*/
+    background: white;
 }
 
 .myedit_midbox {
@@ -83,6 +84,9 @@
     font-size: 2rem;
     /*border: 1px solid #000;*/
     text-align: center;
+    background-color: #f2f2f2;
+    border: 1px solid white;
+
 }
 
 .myedit_email {
@@ -93,15 +97,19 @@
     /*border: 1px solid #000;*/
     text-align: center;
     /*background-color: #f0f0f0;*/
+    background-color: #f2f2f2;
+    border: 1px solid white;
 }
 
 .myedit_intro {
     width: 50rem;
     height: 10rem;
-    font-size: 1rem;
+    font-size: 1.75rem;
     margin: 5px auto 5px auto;
     /*border: 1px solid #000;*/
     text-align: center;
+    background-color: #f2f2f2;
+    border: 1px solid white;
 }
 
 .myedit_bottom {
@@ -135,8 +143,12 @@
     height: 100px;
     border: 1px solid #000;
     line-height: 6rem;
-    background-color: #f0f0f0;
+    border: 1px solid white;
+    /*border: 1px solid #000;*/
+    background-color: #4CAF50;
+    text-decoration: none;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .myedit_imgupload {
@@ -145,4 +157,27 @@
 
 .name_edit {
     width: 10rem;
+}
+
+body {
+    background: #76b852; /* fallback for old browsers */
+    background: rgb(141, 194, 111);
+    background: linear-gradient(90deg, rgba(141, 194, 111, 1) 0%, rgba(118, 184, 82, 1) 50%);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+    border: 1px solid white;
+    /*border: 1px solid #000;*/
+    background-color: #4CAF50;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+p {
+    font-weight: bold;
+    margin: 20px;
 }

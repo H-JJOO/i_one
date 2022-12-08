@@ -4,7 +4,8 @@ import pymysql
 import json
 import bcrypt
 
-from flask_paginate import Pagination,get_page_args
+from flask_paginate import Pagination, get_page_args
+
 # from werkzeug.utils import secure_filename
 # UPLOAD_FOLDER = 'static/img'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -23,11 +24,15 @@ app.config["SECRET_KEY"] = "abcd"
 @app.route('/')
 def home():
     per_page = 6
-    page, _, offset = get_page_args(per_page=per_page)  # page 기본값 1 offset 0 _ 뜻은 per paper / 포스트 10개씩 페이지네이션
+    page, _, offset = get_page_args(per_page = per_page)  # page 기본값 1 offset 0 _ 뜻은 per paper / 포스트 10개씩 페이지네이션
     print(page, _, offset)
 
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
+
     curs = db.cursor()
 
     curs.execute("SELECT COUNT(*) FROM post;")
@@ -40,8 +45,8 @@ def home():
     db.commit()
     db.close()
 
-    pagination = Pagination(page=page, per_page=per_page, total=all_count, record_name='post',
-                            css_framework='foundation', bs_version=5)
+    pagination = Pagination(page = page, per_page = per_page, total = all_count, record_name = 'post',
+                            css_framework = 'foundation', bs_version = 5)
 
     #
     # if "id" not in session:
@@ -53,9 +58,10 @@ def home():
     #                        name=session["name"], css_framework='foundation', bs_version=5)
     #
     if "name" in session:
-        return render_template('main.html', data_lists=data_list,   pagination=pagination, name = session.get("name"), login = True)
+        return render_template('main.html', data_lists = data_list, pagination = pagination, name = session.get("name"),
+                               login = True)
     else:
-        return render_template('main.html', data_lists=data_list,   pagination=pagination, login = False)
+        return render_template('main.html', data_lists = data_list, pagination = pagination, login = False)
 
 
 # ##메인페이지에 찎어주자구
@@ -83,8 +89,11 @@ def home():
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
 
     curs = db.cursor()
 
@@ -100,8 +109,6 @@ def login():
         # print(session)
 
         # print(session['uid'])
-
-
 
         curs.execute("SELECT * FROM user")
 
@@ -150,7 +157,11 @@ def mypage_edit():
 def get_users(id):
     if "name" in session:
         db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
-                             db = 'ione', password = 'ione1234', charset = 'utf8')
+                             db = 'ione',
+                             password = 'ione1234', charset = 'utf8')
+
+        # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+        #                      password = 'M@ansghkwo12', charset = 'utf8')
         curs = db.cursor()
 
         sql = '''SELECT user_id, name, gender, email, location, profile_image, intro FROM `user`'''
@@ -182,7 +193,11 @@ def get_users(id):
 def put_users(id):
     if "name" in session:
         db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
-                             db = 'ione', password = 'ione1234', charset = 'utf8')
+                             db = 'ione',
+                             password = 'ione1234', charset = 'utf8')
+
+        # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+        #                      password = 'M@ansghkwo12', charset = 'utf8')
         curs = db.cursor()
 
         name = request.form["name"]
@@ -216,10 +231,12 @@ def put_users(id):
 
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
-
 def insertuser():
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
     if request.method == 'POST':
         uid = request.form['userId']
@@ -232,7 +249,6 @@ def insertuser():
         email = request.form["email"]
         loc = request.form['location']
         intro = request.form['intro']
-
 
         sql = """insert into user (user_id, password, name, gender, email, location, intro)
          values (%s,%s,%s,%s,%s,%s,%s)
@@ -256,6 +272,7 @@ def insertuser():
 
         session["name"] = nm
 
+
         db.commit()
 
     db.close()
@@ -263,12 +280,11 @@ def insertuser():
     return redirect("/")
 
 
-#write 글쓰기 페이지
+# write 글쓰기 페이지
 @app.route('/write')
 def write():
     # return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
-    return render_template('write.html', id = session.get("uid"), name=session.get("name"), login=True)
-
+    return render_template('write.html', id = session.get("uid"), name = session.get("name"), login = True)
 
     #
     # if "name" in session:
@@ -277,12 +293,14 @@ def write():
     #     return render_template('write.html', login = False)
 
 
-
-#write 에서 포스팅하기
+# write 에서 포스팅하기
 @app.route('/write', methods = ['POST'])
 def insertpost():
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
     print(session.get("uid"))
 
@@ -303,12 +321,16 @@ def insertpost():
 
         return redirect("/")
 
+
 # 게시글 페이지 보여주기
 
-@app.route('/post/<id>', methods=['GET'])
+@app.route('/post/<id>', methods = ['GET'])
 def post(id):
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
 
     sql = f"SELECT * FROM post WHERE id = '{id}'"
@@ -322,14 +344,18 @@ def post(id):
 
     db.commit()
     db.close()
-    return render_template('detail.html', list=list)
+    return render_template('detail.html', list = list)
+
 
 # edit 페이지 보여주기
 
-@app.route('/edit/<id>', methods=['GET'])
+@app.route('/edit/<id>', methods = ['GET'])
 def correction(id):
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
 
     sql = f"SELECT * FROM post WHERE id = '{id}'"
@@ -343,14 +369,18 @@ def correction(id):
 
     db.commit()
     db.close()
-    return render_template('edit.html', list=list)
+    return render_template('edit.html', list = list)
+
 
 # 수정된 게시글을 post방식으로 DB에 보내주기
 
-@app.route('/edit/<id>', methods=['POST'])
+@app.route('/edit/<id>', methods = ['POST'])
 def edit(id):
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
 
     title = request.form["title"]
@@ -365,12 +395,16 @@ def edit(id):
 
     return redirect(f'/post/{id}')
 
+
 # 게시글 삭제하기
 
-@app.route("/delete/<id>", methods=["GET","POST","DELETE"])
+@app.route("/delete/<id>", methods = ["GET", "POST", "DELETE"])
 def delete_post(id):
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
+                         password = 'ione1234', charset = 'utf8')
+
+    # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
+    #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
 
     sql = f"DELETE FROM post WHERE id = '{id}'"
@@ -380,8 +414,7 @@ def delete_post(id):
     db.close()
     # flash("삭제 완료")
 
-    return  redirect('/')
-
+    return redirect('/')
 
 
 @app.route('/logout')
