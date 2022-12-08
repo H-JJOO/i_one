@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>뉴스피드</title>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header {
+        background-color: #5d9f;
+        color: #fff;
+        border-bottom: 1px solid #2c3863;
+        height: 45px;
+    }
+
+    .search {
+        position: absolute;
+        left: 300px;
+        right: 300px;
+    }
+
+    .searchbar {
+        border: 1px solid #2c3863;
+        width: 100%;
+        border-radius: 5px;
+        padding: 6px;
+        margin-top: 7px;
+    }
+
+    .container {
+        background-color: #d7d8dc;
+
+    }
+
+    .feed {
+        border-top: 1px solid #c0c0c0;
+        border-bottom: 1px solid #c0c0c0;
+        margin: 7px 0;
+        padding: 12px;
+    }
+
+    .date {
+        color: #999;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        font-weight: 600;
+    }
+
+    .content {
+        margin-top: 5px;
+    }
+
+    .btn-default {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+</style>
+
+<script>
+    // const delete_board = () => {
+    //     const check = confirm("삭제 하시겠습니까?");
+    //
+    //     if (check) {
+    //         const board_id = "{{detailDict['detail']['id']}}"
+    //         $.ajax({
+    //             type: "DELETE",
+    //             url: "/post",
+    //             data: {board_id_give: board_id},
+    //             success: function (response) {
+    //                 if (response["msg"] === 1) {
+    //                     alert("삭제 완료")
+    //                     location.href = "/";
+    //                 }
+    //             }
+    //         });
+    //     }
+</script>
+
+<body>
+    <div class="header">
+        <div class="search">
+            <input type="text" class="searchbar" placeholder="Search">
+        </div>
+    </div>
+    <div class="container">
+        <div class="feed">
+            <a class="title">글 제목</a>
+            <h5 class="name">이름</h5>
+            <h5 class="date">날짜</h5>
+            <p class="content">글 내용</p>
+        </div>
+    </div>
+    <button href="/edit.html" class="btn btn-default">수정</button>
+    <button class="btn btn-default" onclick="delete_board()">삭제</button>
+</body>
+</html>
