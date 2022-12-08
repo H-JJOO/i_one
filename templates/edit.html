@@ -1,9 +1,57 @@
-{% extends 'main.html' %}
-{% block head %}
-<title>EDIT</title>
-{% endblock %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<div>여기 작업하면 됩니다.</div>
+    <!-- 반응형 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{% endblock %}
+    <title>게시판 수정</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>게시판 수정</h2>
+      <form method="POST" action="/edit/{{list[0][0]}}">
+        <div class="form-group">
+          <label>제목</label>
+          <input type="text" class="form-control" id="title"
+             placeholder="제목 입력" name="title"
+             maxlength="100" required="required"
+             pattern=".{1,100}" value="{{list[0][1]}}">
+        </div>
+        <div class="form-group">
+          <label>내용</label>
+          <textarea class="form-control" rows="5" id="edit"
+                    name="content">{{list[0][2]}}</textarea>
+        </div>
+
+          <div class="bt_wrap">
+            <input type="submit" value="수정" class="btn btn-default" /></a></button>
+            <button class="btn btn-default"><a href="/board/{{ list[0][0] }}">취소</a></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+<!--{% extends 'main.html' %}-->
+<!--{% block head %}-->
+<!--<title>EDIT</title>-->
+<!--{% endblock %}-->
+<!--{% block body %}-->
+
+<!--<div>여기 작업하면 됩니다.</div>-->
+
+<!--{% endblock %}-->
