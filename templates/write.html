@@ -1,9 +1,97 @@
-{% extends 'main.html' %}
-{% block head %}
-<title>WRITE</title>
-{% endblock %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
 
-<div>여기 작업하면 됩니다.</div>
+    <title>게시판 글쓰기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .btn-default {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+</style>
+<script>
+//     $(document).ready(function () {
+//     save_board();
+// });
+//
+// function save_board() {
+//     let title = $("#title").val();
+//     let content = $("#content").val();
+//
+//     //   if (title === "" || content === "") {
+//     //     alert("작성해주세요.");
+//     //     return;
+//     // }
+//     $.ajax({
+//         type: "POST",
+//         url: "/boards/board",
+//         data: {
+//             'id': userId,
+//             'title': title,
+//             'content': content
+//         },
+//         success: function (response) {
+//             alert(response["msg"]);
+//             window.location.reload();
+//         }
+//     });
+// }
+//
 
-{% endblock %}
+
+</script>
+
+<nav>
+    <a href="main.html" class="nav__column">I-log</a>
+    <div class="nav__column">
+        {% if login == True %}
+        <h3>{{id}} {{name}}님 어서오세요!</h3>
+
+        <a href="logout">로그아웃</a>
+        {% else %}
+        <a href="/users/login" class="nav__column--login-btn">로그인</a>
+        {% endif %}
+        <div><i class="fas fa-adjust fa-xl"></i></div>
+        <a href="search.html" class="nav__column--search-btn">
+            <i class="fas fa-search fa-xl"></i>
+        </a>
+    </div>
+</nav>
+
+
+<div class="container">
+  <h2>게시판 글쓰기</h2>
+  <form action="/write" method="post">
+    <div class="form-group">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" id="title"
+       placeholder="제목 입력" name="title"
+       maxlength="100" required="required"
+       pattern=".{1,100}">
+    </div>
+    <div class="form-group">
+   <label for="content">내용</label>
+   <textarea class="form-control" rows="5" id="content"
+    name="content" placeholder="내용 작성"></textarea>
+    </div>
+
+<!--       <input type="text" class="form-control" id="content_image" name="content_image">-->
+
+            <input type="file"   id="content_image" name="content_image" class="image_inputType_file" accept="img/*"  multiple>
+
+<!--      <div class="info">-->
+<!--          <dt>파일 첨부</dt>-->
+<!--&lt;!&ndash;          <input type="file" id="realinput" class="image_inputType_file" accept="img/*" required multiple>&ndash;&gt;-->
+<!--      </div>-->
+    <button type="submit" class="btn btn-default">작성</button>
+  </form>
+</div>
+</body>
+</html>
