@@ -92,7 +92,7 @@ def login():
         uid = request.form['userId']
         upw = request.form['password']
 
-        # session['uid'] = request.form['userId']
+        session['uid'] = request.form['userId']
 
         # print('Login OKAY!')
         # print(session['uid'])
@@ -302,6 +302,85 @@ def insertpost():
         db.close()
 
         return redirect("/")
+
+# 게시글 페이지 보여주기
+
+@app.route('/post/<id>', methods=['GET'])
+def post(id):
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+    curs = db.cursor()
+
+    sql = f"SELECT * FROM post WHERE id = '{id}'"
+
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    list = []
+    for row in rows:
+        list.append(row)
+
+    db.commit()
+    db.close()
+    return render_template('detail.html', list=list)
+
+# edit 페이지 보여주기
+
+@app.route('/edit/<id>', methods=['GET'])
+def correction(id):
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+    curs = db.cursor()
+
+    sql = f"SELECT * FROM post WHERE id = '{id}'"
+
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    list = []
+    for row in rows:
+        list.append(row)
+
+    db.commit()
+    db.close()
+    return render_template('edit.html', list=list)
+
+# 수정된 게시글을 post방식으로 DB에 보내주기
+
+@app.route('/edit/<id>', methods=['POST'])
+def edit(id):
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+    curs = db.cursor()
+
+    title = request.form["title"]
+    content = request.form["content"]
+
+    sql = f"UPDATE post SET title = %s, content = %s WHERE id = '{id}';"
+
+    curs.execute(sql, (title, content))
+
+    db.commit()
+    db.close()
+
+    return redirect(f'/post/{id}')
+
+# 게시글 삭제하기
+
+@app.route("/delete/<id>", methods=["GET","POST","DELETE"])
+def delete_post(id):
+    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+                         password='ione1234', charset='utf8')
+    curs = db.cursor()
+
+    sql = f"DELETE FROM post WHERE id = '{id}'"
+    curs.execute(sql)
+
+    db.commit()
+    db.close()
+    # flash("삭제 완료")
+
+    return  redirect('/')
 
 
 

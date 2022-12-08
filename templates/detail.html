@@ -1,9 +1,108 @@
-{% extends 'main.html' %}
-{% block head %}
-<title>DETAIL</title>
-{% endblock %}
-{% block body %}
 
-<div>여기 작업하면 됩니다.</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--    <link rel="stylesheet" href="../static/css/view.css"/>-->
+    <title>상세페이지</title>
+        <style>
+        .detail_img {
 
-{% endblock %}
+            width: 500px;
+            height: 400px;
+
+            color: white;
+
+            text-align: center;
+
+            background-image: url();
+            background-size: cover;
+            background-position: center;
+
+            border-radius: 10px;
+
+            padding-top: 40px;
+        }
+        .detail_wrap {
+            width: 1000px;
+            margin: auto;
+
+            margin-top: 10px;
+            text-align: center;
+            font-size: 15px;
+        }
+        .bt_wrap {
+            width: 1000px;
+            margin: auto;
+
+            margin-top: 10px;
+            text-align: center;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<nav>
+    <a href="/">I-log</a>
+<!--    <a href="/write">글쓰기</a>-->
+</nav>
+<div class="detail_wrap">
+    <div class="detail_img"></div>
+    <div class="title"><h1>{{ list[0][1] }}</h1></div>
+    <div class="info">
+        <dl>
+            <dt>글쓴이 : {{ list[0][4] }}</dt>
+        </dl>
+        <dl>
+            <dt>작성일 : {{ list[0][5] }}</dt>
+        </dl>
+    </div>
+    <div id="content">
+        <dl>
+            <dt><h2>{{ list[0][2] }}</h2></dt>
+        </dl>
+    </div>
+    <!--        <script>-->
+    <!--            let tmpStr = "{{ list[0][2] }}"-->
+    <!--            tmpStr = tmpStr.replaceAll("&lt;", "<");-->
+    <!--            tmpStr = tmpStr.replaceAll("&gt;", ">");-->
+    <!--            tmpStr = tmpStr.replaceAll("&amp;lt;", "<");-->
+    <!--            tmpStr = tmpStr.replaceAll("&amp;gt;", ">");-->
+    <!--            tmpStr = tmpStr.replaceAll("&amp;nbsp;", " ");-->
+    <!--            tmpStr = tmpStr.replaceAll("&amp;amp;", "&");-->
+    <!--            tmpStr = tmpStr.replaceAll("&#34;", '"');-->
+    <!--            document.getElementById("content").innerHTML = tmpStr;-->
+    <!--        </script>-->
+</div>
+</div>
+<div class="bt_wrap">
+    <a href="/edit/{{ list[0][0] }}">수정</a>
+    <a href="/delete/{{ list[0][0] }}">삭제</a>
+
+    {# <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>#}
+    <a href="/" onclick="window.location.reload()">나가기</a>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--{% extends 'main.html' %}-->
+<!--{% block head %}-->
+<!--<title>DETAIL</title>-->
+<!--{% endblock %}-->
+<!--{% block body %}-->
+
+<!--<div>여기 작업하면 됩니다.</div>-->
+
+<!--{% endblock %}-->
+
