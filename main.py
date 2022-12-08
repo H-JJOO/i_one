@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, session, redirect
 import pymysql
 import json
 import bcrypt
+from flask_paginate import Pagination,get_page_args
+
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "abcd"
@@ -10,32 +13,64 @@ app.config["SECRET_KEY"] = "abcd"
 # main
 @app.route('/')
 def home():
-    if "name" in session:
-        return render_template('main.html', name = session.get("name"), login = True)
-    else:
-        return render_template('main.html', login = False)
+    per_page = 6
+    page, _, offset = get_page_args(per_page=per_page)  # page 기본값 1 offset 0 _ 뜻은 per paper / 포스트 10개씩 페이지네이션
+    print(page, _, offset)
 
-
-##메인페이지에 찎어주자구
-@app.route('/feed', methods=['GET'])
-def get_posts():
     db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
                          password='ione1234', charset='utf8')
     curs = db.cursor()
 
-    sql = "select * from post"
-    print(sql)
+    curs.execute("SELECT COUNT(*) FROM post;")
 
-    curs.execute(sql)
+    all_count = curs.fetchall()[0][0]
 
-    rows = curs.fetchall()
-    print(rows)
+    curs.execute("SELECT * FROM post ORDER BY `created_at` DESC LIMIT %s OFFSET %s;", (per_page, offset))
+    data_list = curs.fetchall()
 
-    json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
     db.commit()
     db.close()
-    return json_str, 200
 
+    pagination = Pagination(page=page, per_page=per_page, total=all_count, record_name='post',
+                            css_framework='foundation', bs_version=5)
+
+    #
+    # if "id" not in session:
+    #     id = None;
+    #     name = None;
+    #     return render_template('main.html', data_lists=data_list, pagination=pagination, id=id, name=name)
+    #
+    # return render_template('main.html', data_lists=data_list, pagination=pagination, id=session["id"],
+    #                        name=session["name"], css_framework='foundation', bs_version=5)
+    #
+
+
+    if "name" in session:
+        return render_template('main.html', data_lists=data_list,   pagination=pagination, name = session.get("name"), login = True)
+    else:
+        return render_template('main.html', data_lists=data_list,   pagination=pagination, login = False)
+
+
+# ##메인페이지에 찎어주자구
+# @app.route('/feed', methods=['GET'])
+# def get_posts():
+#     db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
+#                          password='ione1234', charset='utf8')
+#     curs = db.cursor()
+#
+#     sql = "select * from post"
+#     print(sql)
+#
+#     curs.execute(sql)
+#
+#     rows = curs.fetchall()
+#     print(rows)
+#
+#     json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
+#     db.commit()
+#     db.close()
+#     return json_str, 200
+#
 
 
 # login
@@ -52,9 +87,10 @@ def login():
         session['uid'] = request.form['userId']
         # session['password'] = request.form['password']
 
-        print('Login OKAY!')
-        print(session['uid'])
-        print(session)
+        # print('Login OKAY!')
+        # print(session['uid'])
+        # print(session['password'])
+        # print(session)
 
         # print(session['uid'])
 
