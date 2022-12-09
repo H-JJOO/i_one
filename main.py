@@ -27,8 +27,7 @@ def home():
     page, _, offset = get_page_args(per_page = per_page)  # page 기본값 1 offset 0 _ 뜻은 per paper / 포스트 10개씩 페이지네이션
     print(page, _, offset)
 
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -38,8 +37,7 @@ def home():
     curs.execute("SELECT COUNT(*) FROM post;")
 
     all_count = curs.fetchall()[0][0]
-
-    curs.execute("SELECT * FROM post ORDER BY `created_at` DESC LIMIT %s OFFSET %s;", (per_page, offset))
+    curs.execute("SELECT * FROM post ORDER BY `created_at` ASC LIMIT %s OFFSET %s;", (per_page, offset))
     data_list = curs.fetchall()
 
     db.commit()
@@ -89,8 +87,7 @@ def home():
 # login
 @app.route('/users/login', methods = ['GET', 'POST'])
 def login():
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -156,9 +153,7 @@ def mypage_edit():
 @app.route('/users/<id>', methods = ['GET'])
 def get_users(id):
     if "name" in session:
-        db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
-                             db = 'ione',
-                             password = 'ione1234', charset = 'utf8')
+        db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
         # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
         #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -192,9 +187,7 @@ def get_users(id):
 @app.route('/users/<id>', methods = ["PUT"])
 def put_users(id):
     if "name" in session:
-        db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin',
-                             db = 'ione',
-                             password = 'ione1234', charset = 'utf8')
+        db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
         # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
         #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -232,8 +225,7 @@ def put_users(id):
 # sign up, INSERT
 @app.route('/users/signup', methods = ['POST'])
 def insertuser():
-    db = pymysql.connect(host='database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user='admin', db='ione',
-                         password='ione1234', charset='utf8')
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -283,10 +275,16 @@ def insertuser():
 # write 글쓰기 페이지
 @app.route('/write')
 def write():
-    # return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
+    if "name" not in session:
+        # flash("로그인을 하세요!!")
+        return render_template("login.html")
+
+
+    else:
+        "name" in session
     return render_template('write.html', id = session.get("uid"), name = session.get("name"), login = True)
 
-    #
+    # return render_template('write.html', id = session.get("user"), name=session.get("name"), login=True)
     # if "name" in session:
     #     return render_template('write.html', name = session.get("name"), login = True)
     # else:
@@ -296,8 +294,9 @@ def write():
 # write 에서 포스팅하기
 @app.route('/write', methods = ['POST'])
 def insertpost():
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+
+
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -326,22 +325,27 @@ def insertpost():
 
 @app.route('/post/<id>', methods = ['GET'])
 def post(id):
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+
+
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
     curs = db.cursor()
+    # 나는 이 db를 선택하겠다 커서로 명령어를 내리는 것이다.
 
     sql = f"SELECT * FROM post WHERE id = '{id}'"
-
+    # sql = f"SELECT * FROM post WHERE id > 0
+    # sql 문 실행완료
     curs.execute(sql)
+    # fectchall() 이거슬 전부다 rows에 담아줘  전부다가 fetchall() select문에서만 fetchall을 사용할 수 있다. insert update는 값을 변경하는 것이에 그 값을 출력할 필요가 없다.
+    #fectchone()
 
     rows = curs.fetchall()
     list = []
     for row in rows:
         list.append(row)
-
+        print(list)
     db.commit()
     db.close()
     return render_template('detail.html', list = list)
@@ -351,8 +355,19 @@ def post(id):
 
 @app.route('/edit/<id>', methods = ['GET'])
 def correction(id):
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+    if "name" not in session:
+        # flash("로그인을 하세요!!")
+        return render_template("login.html")
+
+    # else:
+    #     "user_id" in session
+    # return render_template('edit.html', id=session.get("uid"), name=session.get("name"), login=True)
+    # #
+    # if "user_id" not in session:
+    #     # flash("로그인을 하세요!!")
+    #     return render_template("login.html")
+
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -376,8 +391,9 @@ def correction(id):
 
 @app.route('/edit/<id>', methods = ['POST'])
 def edit(id):
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
+
+
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
 
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
     #                      password = 'M@ansghkwo12', charset = 'utf8')
@@ -400,11 +416,15 @@ def edit(id):
 
 @app.route("/delete/<id>", methods = ["GET", "POST", "DELETE"])
 def delete_post(id):
-    db = pymysql.connect(host = 'database-1.cbegjfm38p8o.ap-northeast-2.rds.amazonaws.com', user = 'admin', db = 'ione',
-                         password = 'ione1234', charset = 'utf8')
 
+    if "user_id" not in session:
+        # flash("로그인을 하세요!!")
+        return render_template("login.html")
+
+
+    db = pymysql.connect(host='localhost', user='root', db='i_log', password='abc1234', charset='utf8')
     # db = pymysql.connect(host = 'localhost', user = 'root', db = 'i_one',
-    #                      password = 'M@ansghkwo12', charset = 'utf8')
+    #                      password = 'abc1234', charset = 'utf8')
     curs = db.cursor()
 
     sql = f"DELETE FROM post WHERE id = '{id}'"
